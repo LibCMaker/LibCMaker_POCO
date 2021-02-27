@@ -27,6 +27,15 @@
   # Library specific build arguments
   #-----------------------------------------------------------------------
 
+  if(MSVC)
+    if(BUILD_SHARED_LIBS)
+      set(_POCO_MT OFF)
+    else()
+      set(_POCO_MT ON)
+    endif()
+    option(POCO_MT "Set to OFF|ON (default is OFF) to control build of POCO as /MT instead of /MD" ${_POCO_MT})
+  endif()
+
 ## +++ Common part of the lib_cmaker_<lib_name> function +++
   set(find_LIB_VARS
     COPY_POCO_CMAKE_BUILD_SCRIPTS

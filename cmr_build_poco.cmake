@@ -52,7 +52,8 @@ option(COPY_POCO_CMAKE_BUILD_SCRIPTS "COPY_POCO_CMAKE_BUILD_SCRIPTS" OFF)
 option(BUILD_SHARED_LIBS "Build shared libraries" ON)
 
 if(MSVC)
-  option(POCO_MT "Set to OFF|ON (default is OFF) to control build of POCO as /MT instead of /MD" OFF)
+# Set by BUILD_SHARED_LIBS in 'cmr_find_package_poco.cmake'.
+#  option(POCO_MT "Set to OFF|ON (default is OFF) to control build of POCO as /MT instead of /MD" OFF)
 
   # allow disabling of internally built OpenSSL# (see below for details)
   # if POCO pre-built OpenSSL directory is found, and POCO_DISABLE_INTERNAL_OPENSSL=OFF,
