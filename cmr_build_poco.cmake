@@ -92,7 +92,7 @@ option(ENABLE_ZIP "Enable Zip" ON)
 option(ENABLE_CPPPARSER "Enable C++ parser" OFF)
 option(ENABLE_POCODOC "Enable Poco Documentation Generator" OFF)
 
-if(MINGW)
+if(MINGW OR IOS)
   set(_ENABLE_PAGECOMPILER OFF)
   set(_ENABLE_PAGECOMPILER_FILE2PAGE OFF)
 else()
