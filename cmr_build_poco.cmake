@@ -42,7 +42,7 @@ list(APPEND CMAKE_MODULE_PATH "${POCO_lib_DIR}/cmake/modules")
 # LibCMaker_<LibName> specific vars and options
 #-----------------------------------------------------------------------
 
-option(COPY_POCO_CMAKE_BUILD_SCRIPTS "COPY_POCO_CMAKE_BUILD_SCRIPTS" OFF)
+option(COPY_POCO_CMAKE_BUILD_SCRIPTS "COPY_POCO_CMAKE_BUILD_SCRIPTS" ON)
 
 
 #-----------------------------------------------------------------------
@@ -91,8 +91,16 @@ option(ENABLE_SEVENZIP "Enable SevenZip" ON)
 option(ENABLE_ZIP "Enable Zip" ON)
 option(ENABLE_CPPPARSER "Enable C++ parser" OFF)
 option(ENABLE_POCODOC "Enable Poco Documentation Generator" OFF)
-option(ENABLE_PAGECOMPILER "Enable PageCompiler" ON)
-option(ENABLE_PAGECOMPILER_FILE2PAGE "Enable File2Page" ON)
+
+if(MINGW)
+  set(_ENABLE_PAGECOMPILER OFF)
+  set(_ENABLE_PAGECOMPILER_FILE2PAGE OFF)
+else()
+  set(_ENABLE_PAGECOMPILER ON)
+  set(_ENABLE_PAGECOMPILER_FILE2PAGE ON)
+endif()
+option(ENABLE_PAGECOMPILER "Enable PageCompiler" ${_ENABLE_PAGECOMPILER})
+option(ENABLE_PAGECOMPILER_FILE2PAGE "Enable File2Page" ${_ENABLE_PAGECOMPILER_FILE2PAGE})
 
 option(ENABLE_TESTS
   "Set to OFF|ON (default is OFF) to control build of POCO tests & samples" OFF)
