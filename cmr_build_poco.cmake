@@ -94,16 +94,26 @@ option(ENABLE_POCODOC "Enable Poco Documentation Generator" OFF)
 
 option(ENABLE_PAGECOMPILER "Enable PageCompiler" OFF)
 option(ENABLE_PAGECOMPILER_FILE2PAGE "Enable File2Page" OFF)
-if(MINGW OR IOS)
-  set(ENABLE_PAGECOMPILER OFF CACHE BOOL "Enable PageCompiler" FORCE)
-  set(ENABLE_PAGECOMPILER_FILE2PAGE OFF CACHE BOOL "Enable File2Page" FORCE)
-endif()
-
 option(ENABLE_TESTS
   "Set to OFF|ON (default is OFF) to control build of POCO tests & samples" OFF)
 
 option(POCO_UNBUNDLED
   "Set to OFF|ON (default is OFF) to control linking dependencies as external" OFF)
+
+if(MINGW OR IOS)
+  set(ENABLE_PAGECOMPILER OFF CACHE BOOL "Enable PageCompiler" FORCE)
+  set(ENABLE_PAGECOMPILER_FILE2PAGE OFF CACHE BOOL "Enable File2Page" FORCE)
+endif()
+
+if(MINGW)
+  # https://github.com/pocoproject/poco/issues/3121
+  # poco cannot be built with: net, mongodb, netssl, netssl_win and redis on mingw.
+  set(ENABLE_NETSSL_WIN OFF CACHE BOOL "Enable NetSSL Windows" FORCE)
+  set(ENABLE_NETSSL OFF CACHE BOOL "Enable NetSSL" FORCE)
+  set(ENABLE_MONGODB OFF CACHE BOOL "Enable MongoDB" FORCE)
+  set(ENABLE_REDIS OFF CACHE BOOL "Enable Redis" FORCE)
+  set(ENABLE_NET OFF CACHE BOOL "Enable Net" FORCE)
+endif()
 
 
 #-----------------------------------------------------------------------
